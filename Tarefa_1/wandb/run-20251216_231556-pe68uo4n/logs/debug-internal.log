@@ -1,0 +1,11 @@
+{"time":"2025-12-16T23:15:56.729150076Z","level":"INFO","msg":"stream: starting","core version":"0.23.1"}
+{"time":"2025-12-16T23:15:59.13601742Z","level":"INFO","msg":"stream: created new stream","id":"pe68uo4n"}
+{"time":"2025-12-16T23:15:59.136196619Z","level":"INFO","msg":"handler: started","stream_id":"pe68uo4n"}
+{"time":"2025-12-16T23:15:59.136963231Z","level":"INFO","msg":"stream: started","id":"pe68uo4n"}
+{"time":"2025-12-16T23:15:59.137000118Z","level":"INFO","msg":"writer: started","stream_id":"pe68uo4n"}
+{"time":"2025-12-16T23:15:59.137006033Z","level":"INFO","msg":"sender: started","stream_id":"pe68uo4n"}
+{"time":"2025-12-16T23:17:01.753684603Z","level":"INFO","msg":"stream: closing","id":"pe68uo4n"}
+{"time":"2025-12-16T23:17:02.300418553Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-12-16T23:17:02.58565491Z","level":"INFO","msg":"handler: closed","stream_id":"pe68uo4n"}
+{"time":"2025-12-16T23:17:02.585811786Z","level":"INFO","msg":"sender: closed","stream_id":"pe68uo4n"}
+{"time":"2025-12-16T23:17:02.585829781Z","level":"INFO","msg":"stream: closed","id":"pe68uo4n"}

@@ -1,0 +1,11 @@
+Training started. Max epochs = 4
+
+Epoch index = 0
+100%|█████████████████████████████████████████| 469/469 [01:35<00:00,  4.89it/s]
+100%|███████████████████████████████████████████| 79/79 [00:07<00:00, 10.28it/s]
+Finished epoch 0 out of 4
+best_epoch_idx: 0
+
+Epoch index = 1
+  8%|███▎                                      | 37/469 [00:10<02:00,  3.58it/s]
+SIGINT received. Exiting gracefully.

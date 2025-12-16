@@ -1,0 +1,57 @@
+_wandb:
+    value:
+        cli_version: 0.23.1
+        e:
+            r89pd8ar8aqznvg4leoa175mgmwqdyap:
+                codePath: Tarefa_1/main.py
+                codePathLocal: main.py
+                cpu_count: 4
+                cpu_count_logical: 4
+                disk:
+                    /:
+                        total: "58581958656"
+                        used: "44345798656"
+                email: hugosachim@ua.pt
+                executable: /usr/bin/python3
+                git:
+                    commit: be9c763ef1cfa3eeef9208d62f73040391515375
+                    remote: https://github.com/HugoSachim/savi-2025-2026-trabalho2-grupoX.git
+                host: hogu-laptop
+                memory:
+                    total: "8134246400"
+                os: Linux-6.14.0-37-generic-x86_64-with-glibc2.39
+                program: /home/hogu/Desktop/savi-2025-2026-trabalho2-grupoX/Tarefa_1/./main.py
+                python: CPython 3.12.3
+                root: /home/hogu/Desktop/savi-2025-2026-trabalho2-grupoX/Tarefa_1
+                startedAt: "2025-12-16T22:24:03.872491Z"
+                writerId: r89pd8ar8aqznvg4leoa175mgmwqdyap
+        m: []
+        python_version: 3.12.3
+        t:
+            "1":
+                - 1
+                - 41
+            "2":
+                - 1
+                - 41
+            "3":
+                - 13
+                - 16
+            "4": 3.12.3
+            "5": 0.23.1
+            "12": 0.23.1
+            "13": linux-x86_64
+batch_size:
+    value: 128
+dataset_folder:
+    value: /home/hogu/Desktop/savi-2025-2026-trabalho2-grupoX/datasets/mnist
+experiment_full_name:
+    value: /home/hogu/Desktop/savi-2025-2026-trabalho2-grupoX/datasets/savi_experiments/2025-12-16
+experiment_path:
+    value: /home/hogu/Desktop/savi-2025-2026-trabalho2-grupoX/datasets/savi_experiments
+num_epochs:
+    value: 4
+percentage_examples:
+    value: 1
+resume_training:
+    value: false

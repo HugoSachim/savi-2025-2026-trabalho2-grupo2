@@ -1,0 +1,14 @@
+Resuming training from last checkpoint.
+checkpoint_file: /home/hogu/Desktop/savi-2025-2026-trabalho2-grupoX/datasets/savi_experiments/2025-12-16/checkpoint.pkl
+dict_keys(['epoch_idx', 'train_epoch_losses', 'test_epoch_losses', 'model_state_dict', 'optimizer_state_dict'])
+Training started. Max epochs = 10
+
+Epoch index = 3
+100%|███████████████████████████████████████████| 47/47 [00:08<00:00,  5.81it/s]
+100%|█████████████████████████████████████████████| 8/8 [00:00<00:00, 11.91it/s]
+Finished epoch 3 out of 10
+best_epoch_idx: 3
+
+Epoch index = 4
+ 51%|█████████████████████▉                     | 24/47 [00:04<00:04,  5.45it/s]
+SIGINT received. Exiting gracefully.

@@ -1,0 +1,5 @@
+Training started. Max epochs = 4
+
+Epoch index = 0
+ 15%|██████▎                                   | 70/469 [00:14<01:22,  4.81it/s]
+SIGINT received. Exiting gracefully.
