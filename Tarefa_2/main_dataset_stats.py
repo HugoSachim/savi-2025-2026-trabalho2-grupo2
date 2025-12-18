@@ -221,7 +221,7 @@ def visualize_dataset(dataset_dir, num_images=36):
         ax.axis('off')
 
     plt.tight_layout()
-    path_mosaico_dataset = "mosaico_dataset.png"
+    path_mosaico_dataset = "./data/mosaico_dataset.png"
     plt.savefig(path_mosaico_dataset)
     plt.close()
     open_file(path_mosaico_dataset)
@@ -241,7 +241,7 @@ def visualize_dataset(dataset_dir, num_images=36):
              transform=plt.gca().transAxes,
              fontsize=10, verticalalignment='top', horizontalalignment='right',
              bbox=dict(facecolor='white', alpha=0.8, edgecolor='black'))
-    path_dist_classes_with_stats = "dist_classes_with_stats.png"
+    path_dist_classes_with_stats = "./data/dist_classes_with_stats.png"
     plt.savefig(path_dist_classes_with_stats)
     plt.close()
     open_file(path_dist_classes_with_stats)
@@ -258,7 +258,7 @@ def visualize_dataset(dataset_dir, num_images=36):
             transform=plt.gca().transAxes,
             fontsize=10, verticalalignment='top', horizontalalignment='right',
             bbox=dict(facecolor='white', alpha=0.8, edgecolor='black'))
-    path_dig_per_image_with_stats = "dig_per_image_with_stats.png"
+    path_dig_per_image_with_stats = "./data/dig_per_image_with_stats.png"
     plt.savefig(path_dig_per_image_with_stats)
     plt.close()
     open_file(path_dig_per_image_with_stats)
@@ -275,12 +275,12 @@ def visualize_dataset(dataset_dir, num_images=36):
             transform=plt.gca().transAxes,
             fontsize=10, verticalalignment='top', horizontalalignment='right',
             bbox=dict(facecolor='white', alpha=0.8, edgecolor='black'))
-    path_digit_sizes_with_stats = "digit_sizes_with_stats.png"
+    path_digit_sizes_with_stats = "./data/digit_sizes_with_stats.png"
     plt.savefig(path_digit_sizes_with_stats)
     plt.close()
     open_file(path_digit_sizes_with_stats)
 
-    print("Visualização e estatísticas geradas:")
+    print("Visualização e estatísticas geradas.")
 
 def open_file(path):
     try:
@@ -298,54 +298,117 @@ def open_file(path):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--base-path", default="data/mnist_detection"
+        "--base-path", default="data/mnist_detection", help='Path to save dataset.'
     )
     parser.add_argument(
-        "--imsize", default=128, type=int
+        "--imsize", default=128, type=int, help='Image size.'
     )
     # foi retirado o tight box de modo a nao reduzir a boinding box
     parser.add_argument(
-        "--max-digit-size", default=36, type=int
+        "--max-digit-size", default=36, type=int, help='Max digit size.'
     )
     parser.add_argument(
-        "--min-digit-size", default=22, type=int
+        "--min-digit-size", default=22, type=int, help='Min digit size.'
     )
     parser.add_argument(
-        "--num-train-images", default=50, type=int
+        "--num-train-images", default=60000, type=int, help='Number train images.'
     )
     parser.add_argument(
-        "--num-test-images", default=25, type=int
+        "--num-test-images", default=10000, type=int, help='Number test images.'
     )
     parser.add_argument(
-        "--min-digits-per-image", default=3, type=int
+        "--min-digits-per-image", default=3, type=int, help='Min digits per image.'
     )
     parser.add_argument(
-        "--max-digits-per-image", default=5, type=int
+        "--max-digits-per-image", default=5, type=int, help='Max digits per image.'
     )
-    parser.add_argument('-vs', '--visualization', action='store_true')
+    parser.add_argument('-vs', '--visualization', action='store_true', help='Análise e Visualização do dataset.')
+    parser.add_argument(
+        '-pv', '--path-visualization', default="data/mnist_detection/train", help='Path to visualization dataset.'
+    )
 
-    # Versão A: Apenas 1 dígito por imagem mas em posição aleatória. min dig 0, max digit 1, min size 28, max size 28
-    # Versão B: Apenas 1 dígito por imagem mas em posição aleatória e com diferenças de escala. min dig 0, max digit 1, min size 22, max size 36
+    # Versão A: Apenas 1 dígito por imagem mas em posição aleatória. min dig 1, max digit 1, min size 28, max size 28
+    # Versão B: Apenas 1 dígito por imagem mas em posição aleatória e com diferenças de escala. min dig 1, max digit 1, min size 22, max size 36
     # Versão C: Múltiplos dígitos por imagem entre 3 a 5 dígitos. min dig 3, max digit 5, min size 28, max size 28
     # Versão D: Múltiplos dígitos por imagem entre 3 a 5 dígitos com diferenças de escala. min dig 3, max digit 5, min size 22, max size 36
+
+    parser.add_argument('-vA', '--versao-A', action='store_true', help='Apenas 1 dígito por imagem mas em posição aleatória.')
+    parser.add_argument('-vB', '--versao-B', action='store_true', help='Apenas 1 dígito por imagem mas em posição aleatória e com diferenças de escala.')
+    parser.add_argument('-vC', '--versao-C', action='store_true', help='Múltiplos dígitos por imagem entre 3 a 5 dígitos.')
+    parser.add_argument('-vD', '--versao-D', action='store_true', help='Múltiplos dígitos por imagem entre 3 a 5 dígitos com diferenças de escala.')
 
     args = parser.parse_args()
 
     if args.visualization:
-        dataset_path = "data/mnist_detection/train"  # ou test
-        visualize_dataset(dataset_path, num_images=49)
-
+        visualize_dataset(args.path_visualization, num_images=25)
     else:
-        X_train, Y_train, X_test, Y_test = mnist.load()
-        for dataset, (X, Y) in zip(["train", "test"], [[X_train, Y_train], [X_test, Y_test]]):
-            num_images = args.num_train_images if dataset == "train" else args.num_test_images
-            generate_dataset(
-                pathlib.Path(args.base_path, dataset),
-                num_images,
-                args.max_digit_size,
-                args.min_digit_size,
-                args.imsize,
-                args.min_digits_per_image,
-                args.max_digits_per_image,
-                X,
-                Y) 
+        if args.versao_A:
+            X_train, Y_train, X_test, Y_test = mnist.load()
+            for dataset, (X, Y) in zip(["train", "test"], [[X_train, Y_train], [X_test, Y_test]]):
+                num_images = args.num_train_images if dataset == "train" else args.num_test_images
+                generate_dataset(
+                    pathlib.Path(args.base_path, dataset),
+                    num_images,
+                    28,
+                    28,
+                    args.imsize,
+                    1,
+                    1,
+                    X,
+                    Y) 
+        elif args.versao_B:
+            X_train, Y_train, X_test, Y_test = mnist.load()
+            for dataset, (X, Y) in zip(["train", "test"], [[X_train, Y_train], [X_test, Y_test]]):
+                num_images = args.num_train_images if dataset == "train" else args.num_test_images
+                generate_dataset(
+                    pathlib.Path(args.base_path, dataset),
+                    num_images,
+                    36,
+                    22,
+                    args.imsize,
+                    1,
+                    1,
+                    X,
+                    Y) 
+        elif args.versao_C:
+            X_train, Y_train, X_test, Y_test = mnist.load()
+            for dataset, (X, Y) in zip(["train", "test"], [[X_train, Y_train], [X_test, Y_test]]):
+                num_images = args.num_train_images if dataset == "train" else args.num_test_images
+                generate_dataset(
+                    pathlib.Path(args.base_path, dataset),
+                    num_images,
+                    28,
+                    28,
+                    args.imsize,
+                    3,
+                    5,
+                    X,
+                    Y) 
+        elif args.versao_D:
+            X_train, Y_train, X_test, Y_test = mnist.load()
+            for dataset, (X, Y) in zip(["train", "test"], [[X_train, Y_train], [X_test, Y_test]]):
+                num_images = args.num_train_images if dataset == "train" else args.num_test_images
+                generate_dataset(
+                    pathlib.Path(args.base_path, dataset),
+                    num_images,
+                    36,
+                    22,
+                    args.imsize,
+                    3,
+                    5,
+                    X,
+                    Y) 
+        else:
+            X_train, Y_train, X_test, Y_test = mnist.load()
+            for dataset, (X, Y) in zip(["train", "test"], [[X_train, Y_train], [X_test, Y_test]]):
+                num_images = args.num_train_images if dataset == "train" else args.num_test_images
+                generate_dataset(
+                    pathlib.Path(args.base_path, dataset),
+                    num_images,
+                    args.max_digit_size,
+                    args.min_digit_size,
+                    args.imsize,
+                    args.min_digits_per_image,
+                    args.max_digits_per_image,
+                    X,
+                    Y) 
