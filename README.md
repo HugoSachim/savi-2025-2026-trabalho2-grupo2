@@ -18,17 +18,20 @@ A Tarefa 1 consiste no desenvolvimento e treino de um classificador de dígitos 
 De seguida, na classe model, foram desenvolvidas duas arquiteturas distintas para comparação: a ModelFullyconnected simples (desenvolvida na aula) e a ModelBetterCNN. Esta última foi a arquitetura escolhida para os resultados finais por ser consideravelmente mais robusta, totalizando 389 322 parâmetros. A ModelBetterCNN é constituída por vários blocos de convolução (Conv2d), seguidos de normalização (BatchNorm2d), ativação (ReLU) e pooling (MaxPool2d). Para evitar o overfitting num modelo desta complexidade, foram também introduzidas camadas de Dropout antes das camadas lineares finais.
 
 ![Rede ModelBetterCNN](images/ModelBetterCNN.png)
+
 *Estrutura detalhada da rede ModelBetterCNN.*
 
 Durante o treino, utilizou-se a ferramenta wandb (Weights & Biases) para monitorizar em tempo real a evolução da perda. Por fim, após o treino, foi realizada a avaliação do modelo no conjunto de teste. 
 
-![Training Curves](datasets/savi_experiments/Tarefa_1/training.png)
+![Training Curves](datasets/savi_experiments/Tarefa_1_ModelBetterCNN/training.png)
+
 *Curvas de evolução da Loss durante o processo de treino.*
 
-O algoritmo calcula métricas detalhadas como Precisão, Recall e F1-Score para cada classe (dígitos 0-9), guardando os resultados num ficheiro JSON  e num relatório de texto ([Ver ficheiro completo](datasets/savi_experiments/Tarefa_1/metrics_summary.txt)), obtendo métricas globais de Precisão de 0.9934, Recall de 0.9934 e F1-Score de 0.9934. Adicionalmente, gerou-se uma Matriz de Confusão utilizando a biblioteca seaborn para visualizar graficamente os erros de classificação e identificar quais os dígitos que a rede confunde com maior frequência.
+O algoritmo calcula métricas detalhadas como Precisão, Recall e F1-Score para cada classe (dígitos 0-9), guardando os resultados num ficheiro JSON  e num [relatório de texto](datasets/savi_experiments/Tarefa_1_ModelBetterCNN/metrics_summary.txt), obtendo métricas globais de Precisão de 0.9934, Recall de 0.9934 e F1-Score de 0.9934. Adicionalmente, gerou-se uma Matriz de Confusão utilizando a biblioteca seaborn para visualizar graficamente os erros de classificação e identificar quais os dígitos que a rede confunde com maior frequência.
 
-![Confusion Matrix](datasets/savi_experiments/Tarefa_1/confusion_matrix.png)
-*Matriz de Confusão resultante do modelo CNN, demonstrando a relação entre as etiquetas verdadeiras e as predições da rede.*
+![Confusion Matrix](datasets/savi_experiments/Tarefa_1_ModelBetterCNN/confusion_matrix.png)
+
+*Matriz de Confusão resultante do modelo CNN.*
 
 --------------------------------------------------
 Tarefa 2: Geração de Dataset de "Cenas" com Dígitos
@@ -37,15 +40,19 @@ A tarefa 2 consistiu na criação de um dataset mais complexo, onde os dígitos 
 Para validar a qualidade do dataset, ao correr o código main_dataset_stats.py -vs, é ativado o código responsável por realizar uma análise estatística completa, gerando histogramas da distribuição de classes e calcular métricas como o tamanho médio dos dígitos e a frequência de objetos por imagem. Adicionalmente, o código gera um mosaico onde as imagens são apresentadas com as respetivas caixas delimitadoras (bounding boxes) desenhadas, permitindo confirmar visualmente.
 
 ![dig_per_image_with_stats](Tarefa_2/data_versao_D/dig_per_image_with_stats.png)
+
 *Número de dígitos por imagem.*
 
 ![digit_sizes_with_stats](Tarefa_2/data_versao_D/digit_sizes_with_stats.png)
+
 *Tamanho médio dos dígitos.*
 
 ![dist_classes_with_stats](Tarefa_2/data_versao_D/dist_classes_with_stats.png)
+
 *Distribuição de Classes.*
 
 ![mosaico_dataset](Tarefa_2/data_versao_D/mosaico_dataset.png)
+
 *Mosaicos de imagens.*
 
 --------------------------------------------------
