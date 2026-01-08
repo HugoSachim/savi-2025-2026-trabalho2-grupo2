@@ -1,0 +1,70 @@
+Classe 0:
+  TP: 972, FP: 11, FN: 8
+  Precision: 0.9888
+  Recall   : 0.9918
+  F1-score : 0.9903
+
+Classe 1:
+  TP: 1129, FP: 5, FN: 6
+  Precision: 0.9956
+  Recall   : 0.9947
+  F1-score : 0.9952
+
+Classe 2:
+  TP: 1027, FP: 30, FN: 5
+  Precision: 0.9716
+  Recall   : 0.9952
+  F1-score : 0.9832
+
+Classe 3:
+  TP: 990, FP: 5, FN: 20
+  Precision: 0.9950
+  Recall   : 0.9802
+  F1-score : 0.9875
+
+Classe 4:
+  TP: 962, FP: 4, FN: 20
+  Precision: 0.9959
+  Recall   : 0.9796
+  F1-score : 0.9877
+
+Classe 5:
+  TP: 882, FP: 13, FN: 10
+  Precision: 0.9855
+  Recall   : 0.9888
+  F1-score : 0.9871
+
+Classe 6:
+  TP: 947, FP: 18, FN: 11
+  Precision: 0.9813
+  Recall   : 0.9885
+  F1-score : 0.9849
+
+Classe 7:
+  TP: 1010, FP: 11, FN: 18
+  Precision: 0.9892
+  Recall   : 0.9825
+  F1-score : 0.9858
+
+Classe 8:
+  TP: 949, FP: 3, FN: 25
+  Precision: 0.9968
+  Recall   : 0.9743
+  F1-score : 0.9855
+
+Classe 9:
+  TP: 1002, FP: 30, FN: 7
+  Precision: 0.9709
+  Recall   : 0.9931
+  F1-score : 0.9819
+
+GLOBAL metrics:
+  Precision: 0.9870
+  Recall   : 0.9870
+  F1-score : 0.9870
+
+MACRO metrics:
+  Precision: 0.9871
+  Recall   : 0.9869
+  F1-score : 0.9869
+

@@ -1,0 +1,23 @@
+2026-01-08 17:39:43,024 INFO    MainThread:8898 [wandb_setup.py:_flush():80] Current SDK version is 0.23.1
+2026-01-08 17:39:43,024 INFO    MainThread:8898 [wandb_setup.py:_flush():80] Configure stats pid to 8898
+2026-01-08 17:39:43,024 INFO    MainThread:8898 [wandb_setup.py:_flush():80] Loading settings from /home/hogu/.config/wandb/settings
+2026-01-08 17:39:43,024 INFO    MainThread:8898 [wandb_setup.py:_flush():80] Loading settings from /home/hogu/Desktop/savi-2025-2026-trabalho2-grupoX/Tarefa_1/wandb/settings
+2026-01-08 17:39:43,024 INFO    MainThread:8898 [wandb_setup.py:_flush():80] Loading settings from environment variables
+2026-01-08 17:39:43,024 INFO    MainThread:8898 [wandb_init.py:setup_run_log_directory():714] Logging user logs to /home/hogu/Desktop/savi-2025-2026-trabalho2-grupoX/Tarefa_1/wandb/run-20260108_173943-i08i3o4e/logs/debug.log
+2026-01-08 17:39:43,024 INFO    MainThread:8898 [wandb_init.py:setup_run_log_directory():715] Logging internal logs to /home/hogu/Desktop/savi-2025-2026-trabalho2-grupoX/Tarefa_1/wandb/run-20260108_173943-i08i3o4e/logs/debug-internal.log
+2026-01-08 17:39:43,025 INFO    MainThread:8898 [wandb_init.py:init():841] calling init triggers
+2026-01-08 17:39:43,025 INFO    MainThread:8898 [wandb_init.py:init():846] wandb.init called with sweep_config: {}
+config: {'dataset_folder': '/home/hogu/Desktop/savi-2025-2026-trabalho2-grupoX/datasets/mnist', 'percentage_examples': 1, 'num_epochs': 10, 'batch_size': 64, 'experiment_path': '/home/hogu/Desktop/savi-2025-2026-trabalho2-grupoX/datasets/savi_experiments', 'resume_training': False, 'experiment_full_name': '/home/hogu/Desktop/savi-2025-2026-trabalho2-grupoX/datasets/savi_experiments/2026-01-08', '_wandb': {}}
+2026-01-08 17:39:43,025 INFO    MainThread:8898 [wandb_init.py:init():889] starting backend
+2026-01-08 17:39:43,293 INFO    MainThread:8898 [wandb_init.py:init():892] sending inform_init request
+2026-01-08 17:39:43,301 INFO    MainThread:8898 [wandb_init.py:init():900] backend started and connected
+2026-01-08 17:39:43,337 INFO    MainThread:8898 [wandb_init.py:init():970] updated telemetry
+2026-01-08 17:39:43,344 INFO    MainThread:8898 [wandb_init.py:init():994] communicating run to backend with 90.0 second timeout
+2026-01-08 17:39:44,158 INFO    MainThread:8898 [wandb_init.py:init():1041] starting run threads in backend
+2026-01-08 17:39:44,840 INFO    MainThread:8898 [wandb_run.py:_console_start():2521] atexit reg
+2026-01-08 17:39:44,841 INFO    MainThread:8898 [wandb_run.py:_redirect():2369] redirect: wrap_raw
+2026-01-08 17:39:44,841 INFO    MainThread:8898 [wandb_run.py:_redirect():2438] Wrapping output streams.
+2026-01-08 17:39:44,841 INFO    MainThread:8898 [wandb_run.py:_redirect():2461] Redirects installed.
+2026-01-08 17:39:44,847 INFO    MainThread:8898 [wandb_init.py:init():1081] run started, returning control to user process
+2026-01-08 18:19:23,297 INFO    wandb-AsyncioManager-main:8898 [service_client.py:_forward_responses():80] Reached EOF.
+2026-01-08 18:19:23,298 INFO    wandb-AsyncioManager-main:8898 [mailbox.py:close():137] Closing mailbox, abandoning 1 handles.

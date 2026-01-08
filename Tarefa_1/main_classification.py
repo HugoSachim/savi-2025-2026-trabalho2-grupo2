@@ -81,7 +81,7 @@ def main():
     # ------------------------------------
     # model = ModelFullyconnected()
     model = ModelBetterCNN()
-    # model = ModelConvNet3()
+    #model = ModelConvNet3()
 
     # ------------------------------------
     # Start trainin

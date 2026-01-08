@@ -1,0 +1,12 @@
+{"time":"2026-01-08T17:39:43.30616674Z","level":"INFO","msg":"stream: starting","core version":"0.23.1"}
+{"time":"2026-01-08T17:39:43.836002808Z","level":"INFO","msg":"stream: created new stream","id":"i08i3o4e"}
+{"time":"2026-01-08T17:39:43.836157015Z","level":"INFO","msg":"handler: started","stream_id":"i08i3o4e"}
+{"time":"2026-01-08T17:39:43.836336209Z","level":"INFO","msg":"stream: started","id":"i08i3o4e"}
+{"time":"2026-01-08T17:39:43.83635796Z","level":"INFO","msg":"writer: started","stream_id":"i08i3o4e"}
+{"time":"2026-01-08T17:39:43.836377787Z","level":"INFO","msg":"sender: started","stream_id":"i08i3o4e"}
+{"time":"2026-01-08T17:44:00.560433982Z","level":"INFO","msg":"api: retrying HTTP error","status":502,"url":"https://api.wandb.ai/files/hugosachim-universidade-de-aveiro/mnist_savi/i08i3o4e/file_stream","body":"\n<html><head>\n<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<title>502 Server Error</title>\n</head>\n<body text=#000000 bgcolor=#ffffff>\n<h1>Error: Server Error</h1>\n<h2>The server encountered a temporary error and could not complete your request.<p>Please try again in 30 seconds.</h2>\n<h2></h2>\n</body></html>\n"}
+{"time":"2026-01-08T18:19:23.296258188Z","level":"INFO","msg":"stream: closing","id":"i08i3o4e"}
+{"time":"2026-01-08T18:19:23.901038044Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2026-01-08T18:19:24.311877236Z","level":"INFO","msg":"handler: closed","stream_id":"i08i3o4e"}
+{"time":"2026-01-08T18:19:24.312488441Z","level":"INFO","msg":"sender: closed","stream_id":"i08i3o4e"}
+{"time":"2026-01-08T18:19:24.312542265Z","level":"INFO","msg":"stream: closed","id":"i08i3o4e"}
