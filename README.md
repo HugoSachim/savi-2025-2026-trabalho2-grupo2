@@ -66,13 +66,17 @@ Sendo possível detetar apenas uma imagem ou um número defenido de imagens reti
 
 ![JanelaDeslizante_1](images/JanelaDeslizante_1.png)
 ![JanelaDeslizante_2](images/JanelaDeslizante_2.png)
+
 *Exemplo deteção por janela deslizante.*
 
 ![JanelaDeslizante_2](images/Resultados_Janela_Deslizante.png)
+
 *Resultado janela deslizante.*
 
 ![3193](images/3193.png)
+
 *Resultado imagem 3193.*
 
 ![6233](images/6233.png)
+
 *Resultado imagem 6233.*
