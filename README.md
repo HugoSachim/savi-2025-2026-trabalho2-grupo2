@@ -11,6 +11,7 @@ Para a execução do código desenvolvido, são necessárias as seguintes biblio
 
 torch torchvision numpy matplotlib seaborn wandb tqdm pillow colorama torchinfo scikit-learn requests opencv-python pandas 
 
+
 --------------------------------------------------
 Tarefa 1: Classificador CNN Otimizado (MNIST Completo)
 
@@ -57,3 +58,21 @@ Para validar a qualidade do dataset, ao correr o código main_dataset_stats.py -
 
 --------------------------------------------------
 Tarefa 3: Deteção por Janela Deslizante (Sliding Window)
+
+A Tarefa 3 teve como objetivo a implementação de um sistema de deteção de objetos utilizando o classificador treinado na Tarefa 1 para localizar dígitos nas cenas complexas geradas na Tarefa 2. Uma vez que o modelo original foi treinado apenas para classificar dígitos centrados e não possui uma classe de fundo (background), a abordagem de janela deslizante foi utilizada para percorrer exaustivamente a imagem de entrada (128x128) à procura de padrões conhecidos.
+O código percorre a imagem utilizando janelas de diferentes escalas (22, 28 e 36 pixels) e um passo (stride) definido pelo utilizador. Para cada janela capturada, o sistema realiza um pré-processamento para verificar se a zona contém informação relevante, evitando processar áreas vazias e se o dígito está centrado na janela. Os recortes são então redimensionados para 28x28 e passados para a rede ModelBetterCNN. Para filtrar os falsos positivos, foi aplicado um limiar de confiança (threshold) de 99% na saída do Softmax. Para resolver o problema de múltiplas deteções sobre o mesmo objeto, implementou-se um algoritmo de Non-Maximum Suppression (NMS), que seleciona apenas a caixa com maior confiança entre deteções sobrepostas.
+Em termos de eficiência, a abordagem de janela deslizante revelou-se computacionalmente exigente, analisando 7425 janelas por imagem com um passo de 2, com tempos de execução a rondar 1.6 segundos por imagem.
+Sendo possível detetar apenas uma imagem ou um número defenido de imagens retiradas da pasta de forma aleatório (-n x), é ainda possível ativar a visualização da janela deslizante para cada um dos casos (-vs).
+
+![JanelaDeslizante_1](images/JanelaDeslizante_1.png)
+![JanelaDeslizante_2](images/JanelaDeslizante_2.png)
+*Exemplo deteção por janela deslizante.*
+
+![JanelaDeslizante_2](images/Resultados_Janela_Deslizante.png)
+*Resultado janela deslizante.*
+
+![3193](images/3193.png)
+*Resultado imagem 3193.*
+
+![6233](images/6233.png)
+*Resultado imagem 6233.*

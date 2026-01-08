@@ -9,11 +9,12 @@ import numpy as np
 import platform
 import subprocess
 import time
-import cv2  # Adicionado para visualização
+import cv2
 from PIL import Image, ImageDraw, ImageOps, ImageFont
 from torchvision import transforms
 import torch.nn.functional as F
 from model import ModelBetterCNN 
+import random
 
 def calculate_iou(box1, box2):
     xA, yA = max(box1[0], box2[0]), max(box1[1], box2[1])
@@ -67,93 +68,142 @@ def is_centered(crop_np, threshold=40):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-m', '--model_path', type=str, default='/home/hogu/Desktop/savi-2025-2026-trabalho2-grupoX/datasets/savi_experiments/Tarefa_1/best.pkl')
-    parser.add_argument('-i', '--image_path', type=str, default='/home/hogu/Desktop/savi-2025-2026-trabalho2-grupoX/Tarefa_2/data_versao_D/mnist_detection/test/images/56.png')
+    parser.add_argument('-m', '--model_path', type=str, default='/home/hogu/Desktop/savi-2025-2026-trabalho2-grupoX/datasets/savi_experiments/Tarefa_1_ModelBetterCNN/best.pkl')
+    parser.add_argument('-i', '--image_path', type=str, default='/home/hogu/Desktop/savi-2025-2026-trabalho2-grupoX/Tarefa_2/data_versao_D/mnist_detection/test/images/87.png')
     parser.add_argument('-t', '--threshold', type=float, default=0.99)
     parser.add_argument('-s', '--stride', type=int, default=2) 
     parser.add_argument('-vs', '--visualize', action='store_true', help='Ativar visualização em tempo real')
+    parser.add_argument('-n', '--num_images', type=int, default=1, help='Número de imagens a processar')
     args = parser.parse_args()
 
-    gts = get_ground_truth_list(args.image_path)
-    
+    image_list = [args.image_path]
+    if args.num_images > 1:
+        img_dir = os.path.dirname(args.image_path)
+        all_imgs = [os.path.join(img_dir, f) for f in os.listdir(img_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
+        image_list = random.sample(all_imgs, min(args.num_images, len(all_imgs)))
+
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     model = ModelBetterCNN().to(device)
     checkpoint = torch.load(args.model_path, map_location=device, weights_only=False)
     model.load_state_dict(checkpoint['model_state_dict'])
     model.eval()
 
-    img_orig = Image.open(args.image_path).convert('RGB')
-    gray_img = img_orig.convert('L')
-    if np.mean(gray_img) > 127: gray_img = ImageOps.invert(gray_img)
+    all_windows, all_times = [], []
 
-    # Preparar imagem para OpenCV (BGR) se visualização estiver ativa
-    img_cv = cv2.cvtColor(np.array(img_orig), cv2.COLOR_RGB2BGR)
-    
-    to_tensor = transforms.ToTensor()
-    detections, scores, classes_list = [], [], []
-    windows_scanned = 0
-    window_sizes = [22, 28, 36] 
+    for current_image_path in image_list:
+        gts = get_ground_truth_list(current_image_path)
+        img_orig = Image.open(current_image_path).convert('RGB')
+        gray_img = img_orig.convert('L')
+        if np.mean(gray_img) > 127: gray_img = ImageOps.invert(gray_img)
 
-    print(f"\n[INFO] A iniciar scan da imagem: {os.path.basename(args.image_path)}")
-    start_time = time.time()
+        img_cv = cv2.cvtColor(np.array(img_orig), cv2.COLOR_RGB2BGR)
+        to_tensor = transforms.ToTensor()
+        detections, scores, classes_list = [], [], []
+        windows_scanned = 0
+        window_sizes = [22, 28, 36] 
 
-    for win_size in window_sizes:
-        for y in range(0, gray_img.height - win_size, args.stride):
-            for x in range(0, gray_img.width - win_size, args.stride):
-                windows_scanned += 1
-                
-                # Visualização em tempo real
-                if args.visualize:
-                    temp_img = img_cv.copy()
-                    # Desenha caixa de scan atual (Branca)
-                    cv2.rectangle(temp_img, (x, y), (x + win_size, y + win_size), (255, 255, 255), 1)
-                    cv2.imshow("Processo de Sliding Window", temp_img)
-                    # waitKey(1) permite que a janela processe o desenho. 
-                    # Aumenta para 20 ou 50 se quiseres ver mais devagar.
-                    if cv2.waitKey(1) & 0xFF == ord('q'):
-                        args.visualize = False # Para a visualização se premires 'q'
+        print(f"\n[INFO] Ficheiro: {os.path.basename(current_image_path)}")
+        start_time = time.time()
 
-                crop = gray_img.crop((x, y, x + win_size, y + win_size))
-                crop_np = np.array(crop)
-                
-                if np.max(crop_np) < 50 or not is_centered(crop_np): continue
-                
-                crop_t = to_tensor(crop.resize((28, 28))).unsqueeze(0).to(device)
-                with torch.no_grad():
-                    logits = model(crop_t)
-                    conf, pred = torch.max(F.softmax(logits, dim=1), dim=1)
-                
-                if conf.item() > args.threshold:
-                    detections.append([x, y, x + win_size, y + win_size])
-                    scores.append(conf.item())
-                    classes_list.append(pred.item())
-                    
-                    # Desenha deteção bruta na imagem base do OpenCV (Verde Fino)
+        for win_size in window_sizes:
+            for y in range(0, gray_img.height - win_size, args.stride):
+                for x in range(0, gray_img.width - win_size, args.stride):
+                    windows_scanned += 1
+                    # Visualização em tempo real
                     if args.visualize:
-                        cv2.rectangle(img_cv, (x, y), (x + win_size, y + win_size), (0, 255, 0), 1)
+                        temp_img = img_cv.copy()
+                        # Desenha caixa de scan atual (Branca)
+                        cv2.rectangle(temp_img, (x, y), (x + win_size, y + win_size), (255, 255, 255), 1)
+                        cv2.imshow("Processo de Sliding Window", temp_img)
+                        # waitKey(1) permite que a janela processe o desenho. 
+                        # Aumenta para 20 ou 50 se quiseres ver mais devagar.
+                        if cv2.waitKey(1) & 0xFF == ord('q'):
+                            args.visualize = False # Para a visualização se premires 'q'
 
-    if args.visualize: cv2.destroyAllWindows()
+                    crop = gray_img.crop((x, y, x + win_size, y + win_size))
+                    crop_np = np.array(crop)
+                    
+                    if np.max(crop_np) < 50 or not is_centered(crop_np): continue
+                    
+                    crop_t = to_tensor(crop.resize((28, 28))).unsqueeze(0).to(device)
+                    with torch.no_grad():
+                        logits = model(crop_t)
+                        conf, pred = torch.max(F.softmax(logits, dim=1), dim=1)
+                    
+                    if conf.item() > args.threshold:
+                        detections.append([x, y, x + win_size, y + win_size])
+                        scores.append(conf.item())
+                        classes_list.append(pred.item())
+                        
+                        # Desenha deteção bruta na imagem base do OpenCV (Verde Fino)
+                        if args.visualize:
+                            cv2.rectangle(img_cv, (x, y), (x + win_size, y + win_size), (0, 255, 0), 1)
 
-    final_boxes, final_scores, final_classes = nms_global(detections, scores, classes_list)
-    execution_time = time.time() - start_time
+        if args.visualize: cv2.destroyAllWindows()
 
-    # DESENHO FINAL (PIL)
-    draw = ImageDraw.Draw(img_orig)
-    try: font = ImageFont.truetype("DejaVuSans-Bold.ttf", 12)
-    except: font = ImageFont.load_default()
+        final_boxes, final_scores, final_classes = nms_global(detections, scores, classes_list)
+        exec_time = time.time() - start_time
+        all_windows.append(windows_scanned)
+        all_times.append(exec_time)
 
-    for gt in gts:
-        draw.rectangle(gt['box'], outline="blue", width=3)
-        draw.text((gt['box'][0], gt['box'][1]-25), f"GT: {gt['class']}", fill="blue", font=font)
+        draw = ImageDraw.Draw(img_orig)
+        try: font = ImageFont.truetype("DejaVuSans-Bold.ttf", 10)
+        except: font = ImageFont.load_default()
 
-    for box, cls, score in zip(final_boxes, final_classes, final_scores):
-        draw.rectangle(box, outline="lime", width=2)
-        draw.text((box[0], box[1]-15), f"DET: {cls} ({score:.2f})", fill="lime", font=font)
-        max_iou = max([calculate_iou(box, gt['box']) for gt in gts]) if gts else 0
-        print(f"Deteção: {cls} | IoU: {max_iou:.4f} | Local: {box}")
+        # Desenhar Ground Truth
+        for gt in gts:
+            draw.rectangle(gt['box'], outline="blue", width=3)
+            draw.text((gt['box'][0], gt['box'][1]-25), f"GT: {gt['class']}", fill="blue", font=font)
+            xmin, ymin, xmax, ymax = gt['box']
+            cx = (xmin + xmax) / 2
+            cy = (ymin + ymax) / 2
+            print(f"GT: {gt['class']} | Janela: {gt['box']} | Centro: ({cx:.1f}, {cy:.1f})")
 
-    print(f"\nEficiência: {windows_scanned} janelas em {execution_time:.2f}s")
-    img_orig.show()
+        # Processar Deteções e imprimir detalhes
+        for box, cls, score in zip(final_boxes, final_classes, final_scores):
+            draw.rectangle(box, outline="lime", width=2)
+            draw.text((box[0], box[1]-15), f"DET:{cls}({score:.2f})", fill="lime", font=font)
+            
+            cx, cy = (box[0] + box[2]) / 2, (box[1] + box[3]) / 2
+            max_iou = max([calculate_iou(box, gt['box']) for gt in gts]) if gts else 0
+            
+            # Verificar hit e obter a classe do GT em caso de erro
+            hit = False
+            gt_esperado = "N/A"
+            for gt in gts:
+                if gt['box'][0] <= cx <= gt['box'][2] and gt['box'][1] <= cy <= gt['box'][3]:
+                    if gt['class'] == cls:
+                        hit = True
+                    else:
+                        gt_esperado = str(gt['class'])
+                    break
+
+            hit_str = "Verdadeiro" if hit else f"Falso (GT Esperado: {gt_esperado})"
+            print(f"Deteção: {cls} | Janela: {box} | Centro: ({cx:.1f}, {cy:.1f}) | IoU: {max_iou:.4f} | {hit_str}")
+
+        print(f"Eficiência: {windows_scanned} janelas em {exec_time:.2f}s")
+
+        # Guardar e abrir
+        filename = os.path.basename(current_image_path)
+        output_dir = "resultados_detecao"
+        if not os.path.exists(output_dir): os.makedirs(output_dir)
+        
+        save_path = os.path.join(os.getcwd(), output_dir, filename)
+        img_orig.save(save_path)
+        
+        try:
+            s = platform.system()
+            if s == "Windows": os.startfile(save_path)
+            elif s == "Darwin": subprocess.call(["open", save_path])
+            else: subprocess.call(["xdg-open", save_path])
+        except: pass
+
+    # MÉDIA FINAL
+    if all_times:
+        print("\n" + "="*50)
+        print(f"RELATÓRIO DE EFICIÊNCIA GLOBAL ({len(all_times)} imagens)")
+        print(f"Média de Tempo:   {sum(all_times)/len(all_times):.3f}s")
+        print("="*50)
 
 if __name__ == '__main__':
     main()
