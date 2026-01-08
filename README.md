@@ -71,7 +71,7 @@ Sendo possível detetar apenas uma imagem ou um número defenido de imagens reti
 
 ![JanelaDeslizante_2](images/Resultados_Janela_Deslizante.png)
 
-*Resultado janela deslizante.*
+*Resultado janela deslizante, imagem 3193 e 6233.*
 
 ![3193](images/3193.png)
 
