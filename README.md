@@ -1,7 +1,6 @@
 # savi-2025-2026-trabalho2-grupoX
 Classificação e Deteção de Dígitos Manuscritos com Redes Neuronais Convolucionais
 
-Introdução
 O trabalho foca-se na aprendizagem profunda (Deep Learning). O objetivo é evoluir de um problema de classificação simples (MNIST clássico) para um cenário mais realista e complexo: a deteção e classificação de múltiplos objetos em imagens maiores.
 
 Neste projeto, consolidam-se os conhecimentos sobre PyTorch, arquiteturas CNN (Convolutional Neural Networks), métricas de avaliação e técnicas de deteção de objetos. O trabalho evolui incrementalmente desde a otimização de um classificador até à implementação de um detetor de objetos completo.
@@ -9,7 +8,6 @@ Neste projeto, consolidam-se os conhecimentos sobre PyTorch, arquiteturas CNN (C
 Para a execução do código desenvolvido, são necessárias as seguintes bibliotecas:
 
 torch torchvision numpy matplotlib seaborn wandb tqdm pillow colorama torchinfo scikit-learn requests opencv-python pandas 
-
 
 --------------------------------------------------
 Tarefa 1: Classificador CNN Otimizado (MNIST Completo)
