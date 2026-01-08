@@ -6,7 +6,6 @@ O trabalho foca-se na aprendizagem profunda (Deep Learning). O objetivo é evolu
 
 Neste projeto, consolidam-se os conhecimentos sobre PyTorch, arquiteturas CNN (Convolutional Neural Networks), métricas de avaliação e técnicas de deteção de objetos. O trabalho evolui incrementalmente desde a otimização de um classificador até à implementação de um detetor de objetos completo.
 
-Configuração e Pré-requisitos
 Para a execução do código desenvolvido, são necessárias as seguintes bibliotecas:
 
 torch torchvision numpy matplotlib seaborn wandb tqdm pillow colorama torchinfo scikit-learn requests opencv-python pandas 
