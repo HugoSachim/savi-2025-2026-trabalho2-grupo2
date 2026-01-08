@@ -9,7 +9,7 @@ Neste projeto, consolidam-se os conhecimentos sobre PyTorch, arquiteturas CNN (C
 Configuração e Pré-requisitos
 Para a execução do código desenvolvido, são necessárias as seguintes bibliotecas:
 
-torch torchvision numpy matplotlib seaborn wandb tqdm pillow colorama torchinfo scikit-learn requests
+torch torchvision numpy matplotlib seaborn wandb tqdm pillow colorama torchinfo scikit-learn requests opencv-python pandas 
 
 --------------------------------------------------
 Tarefa 1: Classificador CNN Otimizado (MNIST Completo)
