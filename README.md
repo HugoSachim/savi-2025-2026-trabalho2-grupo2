@@ -77,3 +77,20 @@ Sendo possível detetar apenas uma imagem ou um número defenido de imagens reti
 ![6233](images/6233.png)
 
 *Resultado imagem 6233.*
+
+--------------------------------------------------
+Tarefa 4: Detetor e Classificador Integrado
+
+A Tarefa 4 representa a evolução final do projeto, focando-se na implementação de uma Fully Convolutional Network (FCN) para a deteção eficiente de números manuscritos, superando as limitações computacionais da abordagem de Janela Deslizante explorada anteriormente. O objetivo central foi transformar o classificador da Tarefa 1 numa rede capaz de processar imagens de dimensões arbitrárias numa única passagem (forward pass), gerando mapas de probabilidade espacial para a localização dos dígitos. A metodologia adotada baseou-se fortemente em Transfer Learning, reaproveitando os pesos e o conhecimento do modelo ModelBetterCNN treinado na Tarefa 1. A arquitetura original foi adaptada removendo as camadas densas (Fully Connected) e substituindo-as por camadas convolucionais 1x1, preservando assim a informação espacial. Adicionalmente, a camada de saída foi ajustada para suportar 11 classes, introduzindo uma classe específica para o "Fundo" (Background), essencial para que a rede aprenda a distinguir ativamente entre zonas de interesse e áreas vazias. Para o treino, foi gerado um dataset misto (mixed_dataset) composto por "patches" de 28x28 píxeis contendo tanto dígitos como fundos aleatórios. Um fator crítico para o sucesso do modelo foi a implementação de técnicas de Data Augmentation no script dataset.py, aplicando rotações e variações de escala aleatórias às imagens de treino. Esta estratégia, combinada com a inicialização via Transfer Learning, permitiu uma convergência rápida da função de perda (Loss) e dotou o modelo de uma elevada capacidade de generalização, evitando o overfitting à classe de fundo. 
+
+![loss_training_FCN_v2](training_FCN_v2.png)
+
+*Curvas de evolução da Loss.*
+
+O processo de inferência final é realizado pelo script main_fcn_detection.py, que submete a imagem completa à rede e processa o mapa de calor resultante. Para filtrar as múltiplas ativações geradas por um único objeto, aplicou-se um algoritmo de Non-Maximum Suppression (NMS) com limiares ajustados, que elimina deteções sobrepostas e redundantes. Os resultados obtidos demonstram uma melhoria drástica na velocidade de processamento face à Tarefa 3, mantendo uma precisão elevada na identificação e classificação dos dígitos. 
+
+![FCN_identification_85](tarefa4_identification_85.png)
+
+![FCN_identification_85_data](data_identification_85.png)
+
+*Resultado da imagem 85 da pasta test da versão D da Tarefa 2.*
