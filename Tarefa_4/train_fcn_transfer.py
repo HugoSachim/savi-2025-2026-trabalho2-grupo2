@@ -55,7 +55,7 @@ def main():
     # 1. Inicializar Modelo
     model = ModelFCN()
     
-    # 2. Transfer Learning (A MAGIA ACONTECE AQUI)
+    # 2. Transfer Learning
     model = load_backbone_weights(model, args.task1_model)
     
     model = model.to(device)

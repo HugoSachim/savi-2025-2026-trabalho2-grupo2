@@ -1,4 +1,4 @@
-# savi-2025-2026-trabalho2-grupoX
+# savi-2025-2026-trabalho2-grupo2
 Classificação e Deteção de Dígitos Manuscritos com Redes Neuronais Convolucionais
 
 O trabalho foca-se na aprendizagem profunda (Deep Learning). O objetivo é evoluir de um problema de classificação simples (MNIST clássico) para um cenário mais realista e complexo: a deteção e classificação de múltiplos objetos em imagens maiores.
@@ -87,7 +87,7 @@ A Tarefa 4 representa a evolução final do projeto, focando-se na implementaç�
 
 *Curvas de evolução da Loss.*
 
-O processo de inferência final é realizado pelo script main_improved_detection.py, que submete a imagem completa à rede e processa o mapa de calor resultante. Para filtrar as múltiplas ativações geradas por um único objeto, aplicou-se um algoritmo de Non-Maximum Suppression (NMS) com limiares ajustados, que elimina deteções sobrepostas e redundantes. Os resultados obtidos demonstram uma melhoria drástica na velocidade de processamento face à Tarefa 3, com tempos de execução inferior a 0.2 segundos por imagem, mantendo uma precisão elevada na identificação e classificação dos dígitos. 
+O processo de inferência final é realizado pelo script main_fcn_detection.py, que submete a imagem completa à rede e processa o mapa de calor resultante. Para filtrar as múltiplas ativações geradas por um único objeto, aplicou-se um algoritmo de Non-Maximum Suppression (NMS) com limiares ajustados, que elimina deteções sobrepostas e redundantes. Os resultados obtidos demonstram uma melhoria drástica na velocidade de processamento face à Tarefa 3, com tempos de execução inferior a 0.2 segundos por imagem, mantendo uma precisão elevada na identificação e classificação dos dígitos. 
 
 ![FCN_identification_85](images/tarefa4_identification_85.png)
 
