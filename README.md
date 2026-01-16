@@ -87,7 +87,7 @@ A Tarefa 4 representa a evolução final do projeto, focando-se na implementaç�
 
 *Curvas de evolução da Loss.*
 
-O processo de inferência final é realizado pelo script main_fcn_detection.py, que submete a imagem completa à rede e processa o mapa de calor resultante. Para filtrar as múltiplas ativações geradas por um único objeto, aplicou-se um algoritmo de Non-Maximum Suppression (NMS) com limiares ajustados, que elimina deteções sobrepostas e redundantes. Os resultados obtidos demonstram uma melhoria drástica na velocidade de processamento face à Tarefa 3, mantendo uma precisão elevada na identificação e classificação dos dígitos. 
+O processo de inferência final é realizado pelo script main_improved_detection.py, que submete a imagem completa à rede e processa o mapa de calor resultante. Para filtrar as múltiplas ativações geradas por um único objeto, aplicou-se um algoritmo de Non-Maximum Suppression (NMS) com limiares ajustados, que elimina deteções sobrepostas e redundantes. Os resultados obtidos demonstram uma melhoria drástica na velocidade de processamento face à Tarefa 3, com tempos de execução inferior a 0.2 segundos por imagem, mantendo uma precisão elevada na identificação e classificação dos dígitos. 
 
 ![FCN_identification_85](images/tarefa4_identification_85.png)
 
