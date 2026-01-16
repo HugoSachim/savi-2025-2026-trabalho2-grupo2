@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Change to your repository directory (optional if you run inside it)
-cd /home/hogu/Desktop/savi-2025-2026-trabalho2-grupoX
+cd /home/hogu/Desktop/savi-2025-2026-trabalho2-grupo2
 
 # Add all changes
 git add .
