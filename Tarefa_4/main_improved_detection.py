@@ -86,7 +86,7 @@ def nms_global(boxes, scores, classes, iou_threshold=0.05):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-m', '--model_path', type=str, default='/home/hogu/Desktop/savi-2025-2026-trabalho2-grupoX/experiments/FCN_Transfer_v2/best.pkl')
-    parser.add_argument('-i', '--image_path', type=str, default='/home/hogu/Desktop/savi-2025-2026-trabalho2-grupoX/Tarefa_2/data_versao_D/mnist_detection/test/images/85.png')
+    parser.add_argument('-i', '--image_path', type=str, default='/home/hogu/Desktop/savi-2025-2026-trabalho2-grupoX/Tarefa_2/data_versao_D/mnist_detection/test/images/40.png')
     parser.add_argument('-t', '--threshold', type=float, default=0.95)
     parser.add_argument('-s', '--scale', type=float, default=1.0) # Ajuste de tamanho
     args = parser.parse_args()

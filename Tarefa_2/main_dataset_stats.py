@@ -311,10 +311,10 @@ if __name__ == "__main__":
         "--min-digit-size", default=22, type=int, help='Min digit size.'
     )
     parser.add_argument(
-        "--num-train-images", default=600, type=int, help='Number train images.'
+        "--num-train-images", default=1000, type=int, help='Number train images.'
     )
     parser.add_argument(
-        "--num-test-images", default=100, type=int, help='Number test images.'
+        "--num-test-images", default=200, type=int, help='Number test images.'
     )
     parser.add_argument(
         "--min-digits-per-image", default=3, type=int, help='Min digits per image.'
